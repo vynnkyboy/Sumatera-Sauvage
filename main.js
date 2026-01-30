@@ -43,13 +43,13 @@ document.getElementById("contactForm")
     e.preventDefault();
 
     const data = {
+        name: e.target.name.value,
         email: e.target.email.value,
-        name: e.target.subject.value,
         message: e.target.message.value
     };
 
     try {
-        const res = await fetch("http://localhost:3000/send-email", {
+        const res = await fetch("/api/send-email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -58,7 +58,7 @@ document.getElementById("contactForm")
         const result = await res.json();
 
         if (result.success) {
-            alert("Pesan berhasil dikirim ke email ✉️");
+            alert("Pesan berhasil dikirim ✉️");
             e.target.reset();
         } else {
             alert("Gagal mengirim pesan");
@@ -68,3 +68,4 @@ document.getElementById("contactForm")
         console.error(err);
     }
 });
+
